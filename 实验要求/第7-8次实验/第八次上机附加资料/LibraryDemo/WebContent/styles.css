@@ -1,0 +1,46 @@
+:active {
+  color: #FFFFFF;
+}
+
+:link {
+  color: #990000;
+}
+
+:visited {
+  color: #990000;
+}
+
+body {
+  background-image: url(images/bkg.gif);
+  color: #000000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: verdana, arial, helvetica; 
+}
+  
+img.logo {
+  padding-bottom: 1em;
+}
+
+p {
+  font-family: verdana, arial, helvetica;
+  font-size : 9pt; 
+}
+
+.center {
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
+
+.inverted {
+  background-color: #990000;
+  color: #FFFFFF;
+}
+
+.smaller {
+  font-size: smaller;
+}

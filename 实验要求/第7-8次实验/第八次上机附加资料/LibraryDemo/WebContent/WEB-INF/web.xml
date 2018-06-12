@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+
+    <display-name>iCarnegie Library Project</display-name>
+    <description>
+       This is iCarnegie's Library reference project for SSD7.
+    </description>
+
+    <servlet>
+      <servlet-name>Controller</servlet-name>
+      <servlet-class>servlet.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/servlet/Controller</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>LibrarianCheckinController</servlet-name>
+      <servlet-class>servlet.LibrarianCheckinController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianCheckinController</servlet-name>
+        <url-pattern>/servlet/LibrarianCheckinController</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+      <servlet-name>LibrarianCheckoutController</servlet-name>
+      <servlet-class>servlet.LibrarianCheckoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianCheckoutController</servlet-name>
+        <url-pattern>/servlet/LibrarianCheckoutController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>LibrarianLoginController</servlet-name>
+      <servlet-class>servlet.LibrarianLoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianLoginController</servlet-name>
+        <url-pattern>/servlet/LibrarianLoginController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>MemberLoginController</servlet-name>
+      <servlet-class>servlet.MemberLoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberLoginController</servlet-name>
+        <url-pattern>/servlet/MemberLoginController</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+      <servlet-name>MemberViewborrowedController</servlet-name>
+      <servlet-class>servlet.MemberViewborrowedController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberViewborrowedController</servlet-name>
+        <url-pattern>/servlet/MemberViewborrowedController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>MemberViewonholdController</servlet-name>
+      <servlet-class>servlet.MemberViewonholdController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MemberViewonholdController</servlet-name>
+        <url-pattern>/servlet/MemberViewonholdController</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>SearchController</servlet-name>
+      <servlet-class>servlet.SearchController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/servlet/SearchController</url-pattern>
+    </servlet-mapping>
+
+</web-app>

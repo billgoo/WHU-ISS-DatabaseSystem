@@ -1,0 +1,7 @@
+DROP TABLE Hold;
+DROP TABLE Book;
+DROP SEQUENCE Book_bookid_seq;
+DROP TABLE BookTitle;
+DROP TABLE Librarian;
+DROP TABLE Member;
+DROP USER webuser;

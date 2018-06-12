@@ -1,0 +1,73 @@
+-- CREATE USER webuser WITH PASSWORD 'webuser';
+
+CREATE TABLE Member
+(
+SSN Integer,
+DriverLicState VARCHAR(50),
+DriverLicNum VARCHAR(50),
+FName VARCHAR(50),
+LName VARCHAR(50),
+Street VARCHAR(255),
+City VARCHAR(50),
+State VARCHAR(50),
+PCode VARCHAR(50),
+Phone VARCHAR(50),
+Email VARCHAR(50),
+Passwd VARCHAR(50),
+CONSTRAINT MemberSSN PRIMARY KEY (SSN)
+);
+GRANT SELECT ON Member TO webuser;
+
+CREATE TABLE Librarian
+(
+SSN Integer,
+FName VARCHAR(50),
+LName VARCHAR(50),
+Street VARCHAR(255),
+City VARCHAR(50),
+State VARCHAR(50),
+PCode VARCHAR(50),
+Phone VARCHAR(50),
+Email VARCHAR(50),
+Passwd VARCHAR(50),
+CONSTRAINT LibrarianSSN PRIMARY KEY (SSN)
+);
+GRANT SELECT ON Librarian TO webuser;
+
+CREATE TABLE BookTitle
+(
+CallNumber VARCHAR(50),
+Name VARCHAR(255),
+Author VARCHAR(50),
+Edition VARCHAR(50),
+ISBN VARCHAR(50),
+Year Integer,
+Publisher VARCHAR(50),
+CONSTRAINT CallNumber PRIMARY KEY (CallNumber)
+);
+GRANT SELECT ON BookTitle TO webuser;
+
+CREATE TABLE Book
+(
+BookID SERIAL,
+CallNumber VARCHAR(50),
+BorrowerSSN Integer,
+DueDate VARCHAR(50),
+LibrarianSSN Integer,
+CONSTRAINT BookID PRIMARY KEY (BookID),
+CONSTRAINT MemberBook FOREIGN KEY (BorrowerSSN) REFERENCES Member(SSN),
+CONSTRAINT LibrarianBook FOREIGN KEY (LibrarianSSN) REFERENCES Librarian(SSN),
+CONSTRAINT TitleBook FOREIGN KEY (CallNumber) REFERENCES BookTitle(CallNumber)
+);
+GRANT SELECT,UPDATE ON Book TO webuser;
+GRANT ALL ON book_bookid_seq TO webuser;
+
+CREATE TABLE Hold
+(
+SSN Integer,
+CallNumber VARCHAR(50),
+HoldDateTime TIMESTAMP,
+CONSTRAINT HoldMember FOREIGN KEY (SSN) REFERENCES Member(SSN),
+CONSTRAINT HoldTitle FOREIGN KEY (CallNumber) REFERENCES BookTitle(CallNumber)
+);
+GRANT SELECT,INSERT,DELETE ON Hold TO webuser;
