@@ -1,0 +1,137 @@
+create domain Pos as varchar(10)  check (value in ('Manager','Assistant','Supervisor'));
+create domain Sex as char(1) check (value in ('M','F'));
+
+create table "Branch" (
+"branchNo" varchar(4) not null primary key,
+"street" varchar(25) not null,
+"city" varchar(15) not null,
+"postcode" varchar(8) not null unique,
+"mgrStaffNo" varchar(4)
+);
+
+create table "Staff"(
+"staffNo" varchar(5) not null primary key,
+"fName" varchar(15) not null,
+"lName" varchar(15) not null,
+"position" Pos not null,
+"sex" Sex not null,
+"DOB" date not null,
+"salary" numeric(7,2) check ("salary" between 6000.00 and 40000.00),
+"supervisorStaffNo" varchar(4),
+"branchNo" varchar(4) not null,
+foreign key("supervisorStaffNo") references "Staff"("staffNo"),
+foreign key("branchNo") references "Branch"("branchNo")
+)
+
+create table "Telephone"(
+"telNo" varchar(13) not null primary key,
+"branchNo" varchar(4),
+foreign key("branchNo") references "Branch"("branchNo")
+)
+
+create table "PrivateOwner"(
+"ownerNo" varchar(5) not null primary key,
+"fName" varchar(15) not null,
+"lName" varchar(15) not null,
+"address" varchar(30),
+"telNo" varchar(13)
+)
+
+create table "Manager"(
+"staffNo" varchar(5) not null primary key,
+"mgrStartDate" date not null,
+"bonus" numeric(7,2),
+foreign key("staffNo") references "Staff"("staffNo")
+)
+
+create table "BussinessOwner"(
+"ownerNo" varchar(5) not null primary key,
+"bName" varchar(25) not null,
+"bType" varchar(20) not null,
+"contractName" varchar(25),
+"address"varchar(30),
+"telNo" varchar(13) not null
+)
+
+create table "PropertyForRent"(
+"propertyNo" varchar(5) not null primary key,
+"street" varchar(25) not null,
+"city" varchar(15) not null,
+"postcode" varchar(8) not null,
+"type" varchar(5) not null,
+"rooms" smallint not null check ("rooms" between 1 and 15),
+"rent" numeric(6,2) not null check("rent" between 0 and 9999.99),
+"ownerNo" varchar(5) not null,
+"staffNo" varchar(5),
+"branchNo" char(4) not null,
+foreign key("staffNo") references "Staff"("staffNo") on delete set null on update cascade,
+foreign key("ownerNo") references "PrivateOwner"("ownerNo") on delete no action on update cascade,
+foreign key("branchNo") references "Branch"("branchNo") on delete no action on update cascade
+)
+
+create table "Client"(
+"clientNo" varchar(5) not null primary key,
+"fName" varchar(15) not null,
+"lName" varchar(15) not null,
+"telNo" varchar(13) ,
+"preferType" varchar(5) not null,
+"maxRent" numeric(6,2)
+)
+
+create table "Viewing"(
+"clientNo" varchar(5) not null,
+"propertyNo" varchar(5) not null,
+"dateView" date not null,
+comment varchar(500),
+primary key("clientNo","propertyNo"),
+foreign key("propertyNo") references "PropertyForRent"("propertyNo"),
+foreign key("clientNo") references "Client"("clientNo")
+)
+
+create table "Registration"(
+"clientNo" varchar(5) not null primary key,
+"branchNo" varchar(4) not null,
+"staffNo" varchar(5) ,
+"dateJoined" date,
+foreign key("clientNo") references "Client"("clientNo"),
+foreign key("branchNo") references "Branch"("branchNo"),
+foreign key("staffNo") references "Staff"("staffNo")
+)
+
+create table "Newspaper"(
+"newspaperName" varchar(20) not null primary key,
+"address" varchar(30),
+"telNo" varchar(13) not null unique,
+"contactName" varchar(25)
+)
+
+create table "Advert"(
+"propertyNo" varchar(5) not null,
+"newspaperName" varchar(20) not null,
+"dateAdvert" date not null,
+"cost" numeric(6,2),
+primary key("propertyNo","newspaperName","dateAdvert"),
+foreign key("propertyNo") references "PropertyForRent"("propertyNo"),
+foreign key("newspaperName") references "Newspaper"("newspaperName")
+)
+
+
+create table "Lease"(
+"leaseNo" char(8) not null primary key,
+"paymentMethod" varchar(15),
+"depositPaid" numeric(6,2),
+"rentStar" date not null,
+"rentFinish" date,
+"clientNo" varchar(5) not null,
+"propertyNo" varchar(5) not null,
+foreign key("clientNo") references "Client"("clientNo"),
+foreign key("propertyNo") references "PropertyForRent"("propertyNo")
+)
+
+
+
+
+
+
+
+
